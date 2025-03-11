@@ -11,13 +11,22 @@ class TarefaController {
     }
   };
 
-  create = ({ body: { descricao } }, res) => {
-    if (!descricao) {
-      return res.status(400).json({ erro: "Descrição é obrigatória" });
+  create = async (req, res) => {
+    const { descricao } = req.body;
+    // const descricao = req.body.descricao;
+    try {
+      if (!descricao) {
+        return res.status(400).json({ erro: "Descrição é obrigatória" });
+      }
+
+      const novaTarefa = await tarefaModel.create(descricao);
+      res.status(201).json(novaTarefa);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ erro: "Erro ao criar tarefa" });
     }
-    const novaTarefa = tarefaModel.create(descricao);
-    res.status(201).json(novaTarefa);
   };
+
   update = ({ params: { id }, body: { concluida } }, res) => {
     const tarefaAtualizada = tarefaModel.update(id, concluida);
     if (!tarefaAtualizada) {
