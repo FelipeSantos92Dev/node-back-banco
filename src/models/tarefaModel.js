@@ -30,13 +30,17 @@ class TarefaModel {
     }
   };
 
-  delete = (id) => {
-    const index = this.tarefas.findIndex((t) => t.id === Number(id));
-    if (index !== -1) {
-      this.tarefas.splice(index, 1);
-      return true;
+  delete = async (id) => {
+    try {
+      const tarefaDeletada = await prisma.task.delete({
+        where: { id },
+      });
+
+      return tarefaDeletada;
+    } catch (error) {
+      console.log("Erro ao deletar a tarefa!", error);
+      throw error;
     }
-    return false;
   };
 }
 export default new TarefaModel();

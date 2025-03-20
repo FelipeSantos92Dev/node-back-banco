@@ -49,12 +49,21 @@ class TarefaController {
     }
   };
 
-  delete = ({ params: { id } }, res) => {
-    const sucesso = tarefaModel.delete(id);
-    if (!sucesso) {
-      return res.status(404).json({ erro: "Tarefa não encontrada" });
+  delete = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const sucesso = await tarefaModel.delete(Number(id));
+
+      if (!sucesso) {
+        return res.status(404).json({ erro: "Tarefa não encontrada" });
+      }
+
+      res.status(200).send({ message: "Tarefa deletada com sucesso!" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro ao excluir tarefa!" });
     }
-    res.status(204).send();
   };
 }
 export default new TarefaController();
