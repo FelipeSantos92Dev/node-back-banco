@@ -256,3 +256,22 @@ export default router;
 2. **Tratamento de Erros**: Implementação de blocos try/catch para lidar com exceções do Prisma
 3. **Persistência de Dados**: Os dados agora são armazenados em um banco SQLite em vez de memória
 4. **Tipagem Automática**: O Prisma gera tipos TypeScript automaticamente para os modelos
+
+## Passos Após Git Clone
+
+1. Instale as dependências do projeto:
+
+   ```bash
+   npm install
+   ```
+
+2. Crie o arquivo `.env` com a variável `DATABASE_URL` apontando para o banco de dados desejado.
+
+```
+ DATABASE_URL="file:./dev.db"
+```
+
+3. Execute as migrações:
+   ```bash
+   npx prisma migrate dev
+   ```
