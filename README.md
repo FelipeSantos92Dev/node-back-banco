@@ -261,17 +261,18 @@ export default router;
 
 1. Instale as dependências do projeto:
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
 2. Crie o arquivo `.env` com a variável `DATABASE_URL` apontando para o banco de dados desejado.
 
 ```
- DATABASE_URL="file:./dev.db"
+DATABASE_URL="file:./dev.db"
 ```
 
 3. Execute as migrações:
-   ```bash
-   npx prisma migrate dev
-   ```
+
+```bash
+npx prisma migrate dev
+```
